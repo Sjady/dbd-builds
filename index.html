@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DBD Build Creator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Dead by Daylight - Build Creator</h1>
+
+    <label for="killer">Tueur :</label>
+    <select id="killer">
+      <option>Trapper</option>
+      <option>Wraith</option>
+      <option>Hillbilly</option>
+      <option>Nurse</option>
+      <option>Myers</option>
+      <option>Huntress</option>
+      <option>Pig</option>
+      <option>Spirit</option>
+      <option>Ghost Face</option>
+      <option>Demogorgon</option>
+      <option>Oni</option>
+      <option>Nemesis</option>
+      <!-- Tu peux en ajouter autant que tu veux -->
+    </select>
+
+    <label for="buildName">Nom du build :</label>
+    <input type="text" id="buildName" placeholder="Ex: Slowdown + Info">
+
+    <label>Perks :</label>
+    <input type="text" class="perk" placeholder="Perk 1">
+    <input type="text" class="perk" placeholder="Perk 2">
+    <input type="text" class="perk" placeholder="Perk 3">
+    <input type="text" class="perk" placeholder="Perk 4">
+
+    <label for="notes">Notes :</label>
+    <textarea id="notes" placeholder="Détails, stratégie, synergie..."></textarea>
+
+    <button onclick="saveBuild()">Sauvegarder</button>
+
+    <h2>Mes Builds</h2>
+    <div id="buildList"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
