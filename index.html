@@ -5,55 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DBD Build Creator</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <div class="container">
-    <h1>Dead by Daylight - Build Creator</h1>
+    <header>
+      <h1>Dead by Daylight - Build Creator</h1>
+      <p>Créez vos builds pour chaque tueur</p>
+    </header>
 
-    <label for="killer">Tueur :</label>
-    <select id="killer">
-<option>Trapper</option>
-<option>Wraith</option>
-<option>Hillbilly</option>
-<option>Nurse</option>
-<option>Myers</option>
-<option>Huntress</option>
-<option>Pig</option>
-<option>Spirit</option>
-<option>Ghost Face</option>
-<option>Demogorgon</option>
-<option>Oni</option>
-<option>Nemesis</option>
-<option>Deathslinger</option>
-<option>Executioner</option>
-<option>Blight</option>
-<option>Twins</option>
-<option>Trickster</option>
-<option>Knight</option>
-<option>Artist</option>
-<option>Ringu</option>
-<option>Mastermind</option>
-      <!-- Tu peux en ajouter autant que tu veux -->
-    </select>
+    <div class="creator-form">
+      <label for="killer">Tueur :</label>
+      <select id="killer"></select>
 
-    <label for="buildName">Nom du build :</label>
-    <input type="text" id="buildName" placeholder="Ex: Slowdown + Info">
+      <label for="buildName">Nom du build :</label>
+      <input type="text" id="buildName" placeholder="Ex: Slowdown + Info">
 
-    <label>Perks :</label>
-    <input type="text" class="perk" placeholder="Perk 1">
-    <input type="text" class="perk" placeholder="Perk 2">
-    <input type="text" class="perk" placeholder="Perk 3">
-    <input type="text" class="perk" placeholder="Perk 4">
+      <label>Perks :</label>
+      <div id="perks-list"></div>
 
-    <label for="notes">Notes :</label>
-    <textarea id="notes" placeholder="Détails, stratégie, synergie..."></textarea>
+      <label for="notes">Notes :</label>
+      <textarea id="notes" placeholder="Détails, stratégie, synergie..."></textarea>
 
-    <button onclick="saveBuild()">Sauvegarder</button>
+      <button onclick="saveBuild()">Sauvegarder</button>
+    </div>
 
-    <h2>Mes Builds</h2>
-    <div id="buildList"></div>
+    <section class="builds">
+      <h2>Mes Builds</h2>
+      <div id="buildList"></div>
+    </section>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
