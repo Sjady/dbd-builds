@@ -1,62 +1,65 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DBD Build Creator</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dead by Daylight - Sélecteur de Tueur</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #f2f2f2;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    select {
+      padding: 10px 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      background-color: #222;
+      color: #f2f2f2;
+    }
+
+    .killer-display {
+      margin-top: 30px;
+    }
+
+    .killer-card {
+      display: inline-block;
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+    }
+
+    .killer-card h2 {
+      margin-bottom: 12px;
+    }
+
+    .killer-img {
+      max-width: 250px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Dead by Daylight - Build Creator</h1>
-      <p>Créez et gérez vos builds pour chaque tueur !</p>
-    </header>
+  <h1>Sélectionne ton tueur</h1>
 
-    <!-- Section des tueurs -->
-    <section class="killers">
-      <h2>Tueurs</h2>
-      <div id="killers-list" class="killers-list">
-        <!-- Les tueurs seront injectés ici dynamiquement -->
-      </div>
-    </section>
+  <select id="killerSelect">
+    <option value="">-- Choisis un tueur --</option>
+  </select>
 
-    <!-- Section des perks -->
-    <section class="perks">
-      <h2>Compétences</h2>
-      <div id="perks-list" class="perks-list">
-        <!-- Les perks seront injectées ici dynamiquement -->
-      </div>
-    </section>
+  <div id="selectedKiller" class="killer-display"></div>
 
-    <!-- Section de création de builds -->
-    <section class="create-build">
-      <h2>Créer un Build</h2>
-      <form id="buildForm">
-        <label for="killer-select">Sélectionner un tueur :</label>
-        <select id="killer-select">
-          <!-- Les tueurs seront ici -->
-        </select>
-
-        <label for="perks-select">Sélectionner des compétences :</label>
-        <div id="perks-select" class="perks-select">
-          <!-- Les perks seront ici -->
-        </div>
-
-        <button type="submit">Enregistrer le build</button>
-      </form>
-    </section>
-
-    <!-- Section pour afficher les builds sauvegardés -->
-    <section class="builds">
-      <h2>Mes Builds</h2>
-      <div id="builds-list">
-        <!-- Les builds enregistrés seront ici -->
-      </div>
-    </section>
-  </div>
+  <script src="script.js"></script>
 </body>
 </html>
-
