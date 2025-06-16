@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -11,29 +12,51 @@
   <div class="container">
     <header>
       <h1>Dead by Daylight - Build Creator</h1>
-      <p>Créez vos builds pour chaque tueur</p>
+      <p>Créez et gérez vos builds pour chaque tueur !</p>
     </header>
 
-    <div class="creator-form">
-      <label for="killer">Tueur :</label>
-      <select id="killer"></select>
+    <!-- Section des tueurs -->
+    <section class="killers">
+      <h2>Tueurs</h2>
+      <div id="killers-list" class="killers-list">
+        <!-- Les tueurs seront injectés ici dynamiquement -->
+      </div>
+    </section>
 
-      <label for="buildName">Nom du build :</label>
-      <input type="text" id="buildName" placeholder="Ex: Slowdown + Info">
+    <!-- Section des perks -->
+    <section class="perks">
+      <h2>Compétences</h2>
+      <div id="perks-list" class="perks-list">
+        <!-- Les perks seront injectées ici dynamiquement -->
+      </div>
+    </section>
 
-      <label>Perks :</label>
-      <div id="perks-list"></div>
+    <!-- Section de création de builds -->
+    <section class="create-build">
+      <h2>Créer un Build</h2>
+      <form id="buildForm">
+        <label for="killer-select">Sélectionner un tueur :</label>
+        <select id="killer-select">
+          <!-- Les tueurs seront ici -->
+        </select>
 
-      <label for="notes">Notes :</label>
-      <textarea id="notes" placeholder="Détails, stratégie, synergie..."></textarea>
+        <label for="perks-select">Sélectionner des compétences :</label>
+        <div id="perks-select" class="perks-select">
+          <!-- Les perks seront ici -->
+        </div>
 
-      <button onclick="saveBuild()">Sauvegarder</button>
-    </div>
+        <button type="submit">Enregistrer le build</button>
+      </form>
+    </section>
 
+    <!-- Section pour afficher les builds sauvegardés -->
     <section class="builds">
       <h2>Mes Builds</h2>
-      <div id="buildList"></div>
+      <div id="builds-list">
+        <!-- Les builds enregistrés seront ici -->
+      </div>
     </section>
   </div>
 </body>
 </html>
+
