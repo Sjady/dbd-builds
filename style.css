@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   width: 100%;
   background-color: #1f1f1f;
   padding: 30px;
@@ -34,84 +34,92 @@ header p {
   color: #ccc;
 }
 
-.creator-form {
+section {
   margin-top: 30px;
 }
 
-label {
-  display: block;
-  margin: 10px 0 5px;
-  font-weight: bold;
+h2 {
+  color: #e63946;
+  text-align: center;
 }
 
-input, select, textarea, button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 5px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #444;
+.killlers-list,
+.perks-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.killer-card,
+.perk-card {
   background-color: #333;
-  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 10px;
+  text-align: center;
+  width: 200px;
+  transition: transform 0.3s ease;
+}
+
+.killer-card:hover,
+.perk-card:hover {
+  transform: scale(1.05);
+}
+
+.killer-card img,
+.perk-card img {
+  width: 50px;
+  height: 50px;
+}
+
+.perk-card p,
+.killer-card p {
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 button {
-  margin-top: 20px;
+  padding: 12px 20px;
   background-color: #e63946;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  width: 100%;
+  margin-top: 20px;
 }
 
 button:hover {
   background-color: #c5303b;
 }
 
-.builds {
-  margin-top: 40px;
+.builds-list {
+  margin-top: 30px;
 }
 
 .build-entry {
   background-color: #222;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-left: 4px solid #e63946;
-  color: #f2f2f2;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-left: 5px solid #e63946;
 }
 
 .build-entry button {
   background-color: #c5303b;
-  margin-left: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .build-entry button:hover {
   background-color: #a1292b;
 }
 
-#perks-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
   margin-top: 10px;
-}
-
-.perk-card {
-  background-color: #333;
-  border-radius: 8px;
-  padding: 12px;
-  text-align: center;
-  transition: transform 0.3s;
-}
-
-.perk-card:hover {
-  transform: scale(1.05);
-}
-
-.perk-card img {
-  width: 40px;
-  height: 40px;
-}
-
-.perk-card p {
-  font-size: 14px;
-  margin-top: 5px;
 }
