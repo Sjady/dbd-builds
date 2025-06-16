@@ -1,96 +1,111 @@
-// Liste de tous les tueurs et leurs perks avec icônes et descriptions
-const killersData = {
-  "Trapper": [
-    { name: "Chase", icon: "url_to_icon", description: "Lorsque vous capturez un survivant, votre prochaine attaque inflige des dégâts supplémentaires." },
-    { name: "Bear Trap", icon: "url_to_icon", description: "Les pièges ont plus de chances de blesser les survivants." }
-  ],
-  "Wraith": [
-    { name: "Wraith Hunt", icon: "url_to_icon", description: "Lorsqu’un survivant est dans votre champ de vision, il est marqué pendant quelques secondes." }
-  ],
-  // Ajoutez ici tous les autres tueurs
-};
+// Exemple de tueurs et perks
+const killers = [
+  { name: "Trapper", img: "url_to_trapper_image" },
+  { name: "Wraith", img: "url_to_wraith_image" },
+  // Ajouter les autres tueurs ici
+];
 
-const allKillers = Object.keys(killersData);
-const killerSelect = document.getElementById('killer');
-const perksList = document.getElementById('perks-list');
+const perks = [
+  { name: "Chase", description: "Augmente la vitesse après une attaque réussie.", icon: "url_to_chase_icon" },
+  { name: "Bear Trap", description: "Pièges qui ralentissent les survivants.", icon: "url_to_beartrap_icon" },
+  // Ajouter les autres perks ici
+];
 
-function populateKillers() {
-  allKillers.forEach(killer => {
-    const option = document.createElement('option');
-    option.value = killer;
-    option.textContent = killer;
-    killerSelect.appendChild(option);
+// Injection des tueurs dans le HTML
+function loadKillers() {
+  const killersList = document.getElementById('killers-list');
+  killers.forEach(killer => {
+    const div = document.createElement('div');
+    div.classList.add('killer-card');
+    div.innerHTML = `
+      <img src="${killer.img}" alt="${killer.name}">
+      <p>${killer.name}</p>
+    `;
+    killersList.appendChild(div);
   });
 
-  // Quand un tueur est sélectionné, afficher ses perks
-  killerSelect.addEventListener('change', loadPerks);
-  loadPerks(); // Initial load
+  // Remplir le select des tueurs
+  const killerSelect = document.getElementById('killer-select');
+  killers.forEach(killer => {
+    const option = document.createElement('option');
+    option.value = killer.name;
+    option.textContent = killer.name;
+    killerSelect.appendChild(option);
+  });
 }
 
+// Injection des perks dans le HTML
 function loadPerks() {
-  const selectedKiller = killerSelect.value;
-  perksList.innerHTML = ''; // Clear previous perks
-
-  if (!selectedKiller) return;
-
-  const perks = killersData[selectedKiller];
+  const perksList = document.getElementById('perks-list');
   perks.forEach(perk => {
-    const perkCard = document.createElement('div');
-    perkCard.classList.add('perk-card');
-
-    perkCard.innerHTML = `
+    const div = document.createElement('div');
+    div.classList.add('perk-card');
+    div.innerHTML = `
       <img src="${perk.icon}" alt="${perk.name}">
       <p>${perk.name}</p>
       <p>${perk.description}</p>
     `;
+    perksList.appendChild(div);
+  });
 
-    perkCard.addEventListener('click', () => togglePerkSelection(perk.name));
-    perksList.appendChild(perkCard);
+  // Permettre la sélection de perks
+  const perksSelect = document.getElementById('perks-select');
+  perks.forEach(perk => {
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = perk.name;
+    checkbox.value = perk.name;
+    const label = document.createElement('label');
+    label.setAttribute('for', perk.name);
+    label.textContent = perk.name;
+    
+    perksSelect.appendChild(checkbox);
+    perksSelect.appendChild(label);
+    perksSelect.appendChild(document.createElement('br'));
   });
 }
 
-function togglePerkSelection(perkName) {
-  // Logique pour sélectionner une perk
-  console.log(`Perk sélectionnée : ${perkName}`);
-}
+// Sauvegarder un build
+document.getElementById('buildForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const selectedKiller = document.getElementById('killer-select').value;
+  const selectedPerks = [];
+  document.querySelectorAll('#perks-select input:checked').forEach(input => {
+    selectedPerks.push(input.value);
+  });
 
-function saveBuild() {
-  const buildName = document.getElementById('buildName').value.trim();
-  const selectedKiller = killerSelect.value;
-  const selectedPerks = []; // Collect selected perks here
-  const notes = document.getElementById('notes').value.trim();
-
-  if (!buildName || selectedPerks.length < 1) {
-    alert("Remplis tous les champs pour sauvegarder.");
+  if (selectedPerks.length !== 4) {
+    alert("Sélectionnez 4 compétences !");
     return;
   }
 
-  const build = { buildName, selectedKiller, selectedPerks, notes };
+  const build = { selectedKiller, selectedPerks };
   const savedBuilds = JSON.parse(localStorage.getItem('dbdBuilds') || '[]');
   savedBuilds.push(build);
   localStorage.setItem('dbdBuilds', JSON.stringify(savedBuilds));
 
   loadBuilds();
-}
+});
 
+// Charger les builds sauvegardés
 function loadBuilds() {
-  const buildList = document.getElementById('buildList');
-  buildList.innerHTML = '';
+  const buildsList = document.getElementById('builds-list');
+  buildsList.innerHTML = '';
   const savedBuilds = JSON.parse(localStorage.getItem('dbdBuilds') || '[]');
 
-  savedBuilds.forEach((build, index) => {
+  savedBuilds.forEach(build => {
     const div = document.createElement('div');
-    div.className = 'build-entry';
+    div.classList.add('build-entry');
     div.innerHTML = `
-      <strong>${build.buildName}</strong> (${build.selectedKiller})<br>
-      Perks: ${build.selectedPerks.join(', ')}<br>
-      Notes: ${build.notes || '–'}
-      <br><button onclick="deleteBuild(${index})">🗑 Supprimer</button>
+      <strong>${build.selectedKiller}</strong>
+      <p>Perks: ${build.selectedPerks.join(', ')}</p>
+      <button onclick="deleteBuild(${savedBuilds.indexOf(build)})">Supprimer</button>
     `;
-    buildList.appendChild(div);
+    buildsList.appendChild(div);
   });
 }
 
+// Supprimer un build
 function deleteBuild(index) {
   const savedBuilds = JSON.parse(localStorage.getItem('dbdBuilds') || '[]');
   savedBuilds.splice(index, 1);
@@ -98,4 +113,10 @@ function deleteBuild(index) {
   loadBuilds();
 }
 
-window.onload = populateKillers;
+// Charger les tueurs et les perks au démarrage
+window.onload = () => {
+  loadKillers();
+  loadPerks();
+  loadBuilds();
+};
+
